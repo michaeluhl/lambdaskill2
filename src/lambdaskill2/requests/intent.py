@@ -1,25 +1,5 @@
-import enum
-
+from lambdaskill2.enums import ConfirmationStatus, DialogState, ResolutionStatus
 from lambdaskill2.requests.body import Request
-
-
-class DialogState(enum.Enum):
-    COMPLETED = "COMPLETED"
-    IN_PROGRESS = "IN_PROGRESS"
-    STARTED = "STARTED"
-
-
-class ConfirmationStatus(enum.Enum):
-    CONFIRMED = "CONFIRMED"
-    DENIED = "DENIED"
-    NONE = "NONE"
-
-
-class ResolutionStatus(enum.Enum):
-    ER_ERROR_EXCEPTION = "ER_ERROR_EXCEPTION"
-    ER_ERROR_TIMEOUT = "ER_ERROR_TIMEOUT"
-    ER_SUCCESS_MATCH = "ER_SUCCESS_MATCH"
-    ER_SUCCESS_NO_MATCH = "ER_SUCCESS_NO_MATCH"
 
 
 class ResolutionValue(object):
@@ -35,6 +15,9 @@ class ResolutionValue(object):
     @property
     def id(self):
         return self.__id
+
+    def prepare(self):
+        return {'value': {'name': self.__name, 'id': self.__id}}
 
 
 class Resolution(object):
@@ -56,6 +39,11 @@ class Resolution(object):
     def values(self):
         return self.__values
 
+    def prepare(self):
+        return {'authority': self.__authority,
+                'status': {'code': str(self.__status_code)},
+                'values': [v.prepare() for v in self.__values]}
+
 
 class Slot(object):
 
@@ -64,7 +52,7 @@ class Slot(object):
         self.__value = json.get('value', None)
         self.__confirmation_status = ConfirmationStatus(json['confirmationStatus'])
         self.__resolutions = None
-        if 'resolutions' in json:
+        if 'resolutions' in json and json['resolutions']:
             self.__resolutions = [Resolution(res) for res in json['resolutions']['resolutionsPerAuthority']]
 
     @property
@@ -75,9 +63,17 @@ class Slot(object):
     def value(self):
         return self.__value
 
+    @value.setter
+    def value(self, v):
+        self.__value = v
+
     @property
     def confirmation_status(self):
         return self.__confirmation_status
+
+    @confirmation_status.setter
+    def confirmation_status(self, cs):
+        self.__confirmation_status = ConfirmationStatus(cs)
 
     @property
     def resolutions(self):
@@ -86,6 +82,15 @@ class Slot(object):
     def __repr__(self):
         return "Slot(name='{}', value='{}')".format(self.name, self.value)
 
+    def prepare(self):
+        container = {'name': self.__name,
+                     'value': self.__value,
+                     'confirmationStatus': str(self.__confirmation_status)}
+        if self.__resolutions is not None:
+            resolutions = {'resolutionsPerAuthority': [r.prepare() for r in self.__resolutions]}
+            container['resolutions'] = resolutions
+        return container
+
 
 class Slots(dict):
 
@@ -93,6 +98,9 @@ class Slots(dict):
         super(Slots, self).__init__()
         for name, value in json.items():
             self[name] = Slot(value)
+
+    def prepare(self):
+        return {k: v.prepare() for k, v in self.items()}
 
 
 class Intent(object):
@@ -110,9 +118,18 @@ class Intent(object):
     def confirmation_status(self):
         return self.__confirmation_status
 
+    @confirmation_status.setter
+    def confirmation_status(self, cs):
+        self.__confirmation_status = ConfirmationStatus(cs)
+
     @property
     def slots(self):
         return self.__slots
+
+    def prepare(self):
+        return {'name': self.__name,
+                'confirmationStatus': str(self.__confirmation_status),
+                'slots': self.__slots.prepare()}
 
 
 class IntentRequest(Request):

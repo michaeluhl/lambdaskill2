@@ -1,13 +1,4 @@
-import enum
-
-
-class PlayerActivity(enum.Enum):
-    IDLE = "IDLE"
-    PAUSED = "PAUSED"
-    PLAYING = "PLAYING"
-    BUFFER_UNDERRUN = "BUFFER_UNDERRUN"
-    FINISHED = "FINISHED"
-    STOPPED = "STOPPED"
+from lambdaskill2.enums import PlayerActivity, SessionEndedReason, SessionEndedErrorType
 
 
 class Application(object):
@@ -268,18 +259,6 @@ class Request(object):
 
 class LaunchRequest(Request):
     pass
-
-
-class SessionEndedReason(enum.Enum):
-    USER_INITIATED = "USER_INITIATED"
-    ERROR = "ERROR"
-    EXCEEDED_MAX_REPROMPTS = "EXCEEDED_MAX_REPROMPTS"
-
-
-class SessionEndedErrorType(enum.Enum):
-    INVALID_RESPONSE = "INVALID_RESPONSE"
-    DEVICE_COMMUNICATION_ERROR = "DEVICE_COMMUNICATION_ERROR"
-    INTERNAL_ERROR = "INTERNAL_ERROR"
 
 
 class SessionEndedError(object):

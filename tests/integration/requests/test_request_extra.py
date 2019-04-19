@@ -2,6 +2,7 @@ from copy import deepcopy
 import json
 import unittest
 
+from lambdaskill2.enums import *
 from lambdaskill2.requests import *
 
 
@@ -37,6 +38,27 @@ class TestIntentRequestExtra(RequestExtraTestCase):
         request_body = RequestBody(deepcopy(type(self).json))
         request = request_body.request
         self.assertIsInstance(request, IntentRequest)
+
+    def test_change_slot_value(self):
+        request_body = RequestBody(deepcopy(type(self).json))
+        intent = request_body.request.intent
+        intent.slots['ZodiacSign'].value = 'taurus'
+        self.assertEqual(intent.slots['ZodiacSign'].value, 'taurus')
+
+    def test_change_slot_confirmation_status(self):
+        request_body = RequestBody(deepcopy(type(self).json))
+        intent = request_body.request.intent
+        intent.slots['ZodiacSign'].confirmation_status = ConfirmationStatus.CONFIRMED
+        self.assertIs(intent.slots['ZodiacSign'].confirmation_status,
+                      ConfirmationStatus.CONFIRMED)
+
+    def test_change_intent_confirmation_status(self):
+        request_body = RequestBody(deepcopy(type(self).json))
+        intent = request_body.request.intent
+        intent.confirmation_status = ConfirmationStatus.CONFIRMED
+        self.assertIs(intent.confirmation_status,
+                      ConfirmationStatus.CONFIRMED)
+
 
 
 class TestLaunchRequestExtra(RequestExtraTestCase):
