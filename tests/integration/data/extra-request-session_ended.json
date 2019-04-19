@@ -1,0 +1,46 @@
+{
+   "session" : {
+      "application" : {
+         "applicationId" : "amzn1.echo-sdk-ams.app.000000-d0ed-0000-ad00-000000d00ebe"
+      },
+      "sessionId" : "amzn1.echo-api.session.0000000-0000-0000-0000-00000000000",
+      "user" : {
+         "userId" : "amzn1.account.AM3B00000000000000000000000"
+      },
+      "new" : false,
+      "attributes" : {
+         "supportedHoroscopePeriods" : {
+            "daily" : true,
+            "weekly" : false,
+            "monthly" : false
+         }
+      }
+   },
+   "request" : {
+      "requestId" : "amzn1.echo-api.request.0000000-0000-0000-0000-00000000000",
+      "reason" : "USER_INITIATED",
+      "timestamp" : "2015-05-13T12:34:56Z",
+      "type" : "SessionEndedRequest",
+      "locale" : "string"
+   },
+   "context" : {
+      "System" : {
+         "user" : {
+            "userId" : "amzn1.account.AM3B00000000000000000000000"
+         },
+         "application" : {
+            "applicationId" : "amzn1.echo-sdk-ams.app.000000-d0ed-0000-ad00-000000d00ebe"
+         },
+         "device" : {
+            "supportedInterfaces" : {
+               "AudioPlayer" : {}
+            }
+         }
+      },
+      "AudioPlayer" : {
+         "playerActivity" : "IDLE",
+         "offsetInMilliseconds" : 0
+      }
+   },
+   "version" : "1.0"
+}

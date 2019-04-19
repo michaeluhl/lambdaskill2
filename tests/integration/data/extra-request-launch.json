@@ -1,0 +1,40 @@
+{
+   "context" : {
+      "System" : {
+         "device" : {
+            "deviceId" : "string",
+            "supportedInterfaces" : {
+               "AudioPlayer" : {}
+            }
+         },
+         "application" : {
+            "applicationId" : "amzn1.echo-sdk-ams.app.000000-d0ed-0000-ad00-000000d00ebe"
+         },
+         "user" : {
+            "userId" : "amzn1.account.AM3B00000000000000000000000"
+         }
+      },
+      "AudioPlayer" : {
+         "playerActivity" : "IDLE",
+         "offsetInMilliseconds" : 0
+      }
+   },
+   "session" : {
+      "user" : {
+         "userId" : "amzn1.account.AM3B00000000000000000000000"
+      },
+      "sessionId" : "amzn1.echo-api.session.0000000-0000-0000-0000-00000000000",
+      "application" : {
+         "applicationId" : "amzn1.echo-sdk-ams.app.000000-d0ed-0000-ad00-000000d00ebe"
+      },
+      "new" : true,
+      "attributes" : {}
+   },
+   "version" : "1.0",
+   "request" : {
+      "timestamp" : "2015-05-13T12:34:56Z",
+      "requestId" : "amzn1.echo-api.request.0000000-0000-0000-0000-00000000000",
+      "locale" : "string",
+      "type" : "LaunchRequest"
+   }
+}
