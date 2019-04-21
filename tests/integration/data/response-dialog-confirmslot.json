@@ -1,0 +1,15 @@
+{
+   "type" : "Dialog.ConfirmSlot",
+   "slotToConfirm" : "string",
+   "updatedIntent" : {
+      "name" : "string",
+      "confirmationStatus" : "NONE",
+      "slots" : {
+         "string" : {
+            "value" : "string",
+            "confirmationStatus" : "NONE",
+            "name" : "string"
+         }
+      }
+   }
+}

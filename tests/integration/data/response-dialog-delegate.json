@@ -1,0 +1,14 @@
+{
+   "updatedIntent" : {
+      "name" : "string",
+      "confirmationStatus" : "NONE",
+      "slots" : {
+         "SlotName" : {
+            "name" : "SlotName",
+            "confirmationStatus" : "NONE",
+            "value" : "string"
+         }
+      }
+   },
+   "type" : "Dialog.Delegate"
+}

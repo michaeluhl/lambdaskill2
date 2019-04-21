@@ -1,0 +1,15 @@
+{
+   "updatedIntent" : {
+      "slots" : {
+         "string" : {
+            "name" : "string",
+            "confirmationStatus" : "NONE",
+            "value" : "string"
+         }
+      },
+      "confirmationStatus" : "NONE",
+      "name" : "string"
+   },
+   "slotToElicit" : "string",
+   "type" : "Dialog.ElicitSlot"
+}

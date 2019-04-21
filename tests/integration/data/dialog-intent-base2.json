@@ -1,0 +1,11 @@
+{
+  "name": "string",
+  "confirmationStatus": "NONE",
+  "slots": {
+    "string": {
+      "name": "string",
+      "value": "string",
+      "confirmationStatus": "NONE"
+    }
+  }
+}

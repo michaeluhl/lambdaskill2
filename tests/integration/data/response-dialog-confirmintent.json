@@ -1,0 +1,14 @@
+{
+   "updatedIntent" : {
+      "name" : "string",
+      "confirmationStatus" : "NONE",
+      "slots" : {
+         "string" : {
+            "value" : "string",
+            "name" : "string",
+            "confirmationStatus" : "NONE"
+         }
+      }
+   },
+   "type" : "Dialog.ConfirmIntent"
+}
