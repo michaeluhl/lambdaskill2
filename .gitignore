@@ -91,6 +91,9 @@ env.bak/
 venv.bak/
 .nox/
 
+# IDEs
+.idea/
+
 # Spyder project settings
 .spyderproject
 .spyproject

@@ -189,7 +189,7 @@ class Prosody(Element):
             return ProsodyPitch(pitch)
         except ValueError:
             pass
-        if re.search('[+-][0-9]{1,2}%', pitch):
+        if re.search(r'[+-][0-9]{1,2}%', pitch):
             return pitch
         raise ValueError('Invalid value for pitch.')
 
@@ -201,7 +201,7 @@ class Prosody(Element):
             return ProsodyVolume(volume)
         except ValueError:
             pass
-        if re.search('[+-][0-9]+(\.[0-9]+)?dB', volume):
+        if re.search(r'[+-][0-9]+(\.[0-9]+)?dB', volume):
             return volume
         raise ValueError('Invalid value for volume.')
 
