@@ -192,7 +192,7 @@ class Directive(Message):
 
 class Event(Message):
 
-    def __init__(self, header, endpoint, payload=None, context=None):
+    def __init__(self, header, endpoint, payload=None):
         if payload is None:
             payload = {}
         super(Event, self).__init__(header=header,
@@ -215,6 +215,8 @@ class SmartHomeRequest(object):
 
     @classmethod
     def from_json(cls, json):
+        if 'directive' not in json:
+            raise ValueError('Not a Smart Home request.')
         return cls(directive=Directive.from_json(json['directive']))
 
 
