@@ -172,7 +172,7 @@ class Message(object):
             return None
         return cls(header=Header.from_json(json.get('header', None)),
                    endpoint=EndPoint.from_json(json.get('endpoint', None)),
-                   payload=None)
+                   payload=json.get('payload', None))
 
     def prepare(self):
         container = {}
