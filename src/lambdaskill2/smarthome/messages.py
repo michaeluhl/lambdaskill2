@@ -185,6 +185,11 @@ class Message(object):
         return container
 
 
+class Directive(Message):
+
+    pass
+
+
 class Event(Message):
 
     def __init__(self, header, endpoint, payload=None, context=None):
@@ -193,22 +198,46 @@ class Event(Message):
         super(Event, self).__init__(header=header,
                                     endpoint=endpoint,
                                     payload=payload)
-        self.__context = context
-
-    @property
-    def context(self):
-        return self.__context
 
     def with_payload(self, payload):
         self.__payload = payload
         return self
+
+
+class SmartHomeRequest(object):
+
+    def __init__(self, directive):
+        self.__directive = directive
+
+    @property
+    def directive(self):
+        return self.__directive
+
+    @classmethod
+    def from_json(cls, json):
+        return cls(directive=Directive.from_json(json['directive']))
+
+
+class SmartHomeResponse(object):
+
+    def __init__(self, event, context=None):
+        self.__event = event
+        self.__context = context
+
+    @property
+    def event(self):
+        return self.__event
+
+    @property
+    def context(self):
+        return self.__context
 
     def with_context(self, context):
         self.__context = context
         return self
 
     def prepare(self):
-        container = super(Event, self).prepare()
+        container = {'event': self.__event.prepare()}
         if self.__context is not None:
-            container['context'] = self.__context
+            container['context'] = self.__context.prepare()
         return container

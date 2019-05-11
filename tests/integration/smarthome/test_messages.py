@@ -33,7 +33,7 @@ class MessageDirectiveTestCase(unittest.TestCase):
                                                "key-0": "value-0"})
 
     def test_directive(self):
-        directive = Message.from_json(self.json['directive'])
+        directive = Directive.from_json(self.json['directive'])
         self.assertIsInstance(directive.header, Header)
         self.assertIsInstance(directive.endpoint, EndPoint)
         self.assertDictEqual(directive.payload, {})
@@ -51,3 +51,14 @@ class BearerTokenScopeTestCase(unittest.TestCase):
         self.assertEqual(scope.token, "access-token")
         self.assertRaises(TypeError, getattr, scope, "partition")
         self.assertRaises(TypeError, getattr, scope, "user_id")
+
+
+class SmartHomeRequestTestCase(unittest.TestCase):
+
+    def setUp(self):
+        with open('tests/integration/data/message-directive-turn_on-with_partition.json', 'rt') as jsonfile:
+            self.json = json.load(jsonfile)
+
+    def test_smart_home_request(self):
+        request = SmartHomeRequest.from_json(self.json)
+        self.assertIsInstance(request.directive, Directive)
